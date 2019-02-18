@@ -17,7 +17,8 @@ public class ItemCollection {
     }
 
     /**
-     * Returns the item with the name given if it is in the collection.
+     * Returns the item with the name given
+     * if it is in the collection.
      * If not it returns<code>null</code>.
      * @param name Name of item to get.
      * @return Item with the name given.
@@ -30,8 +31,8 @@ public class ItemCollection {
 
     /**
      * Takes the item with the given name out of the collection
-     * and returns it. If there is no item by that name<code>null</code>is
-     * returned.
+     * and returns it. If there is no item by that
+     * name<code>null</code>is returned.
      */
     public Item take(String name) {
         Item item = items.get(name);

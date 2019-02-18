@@ -18,13 +18,15 @@ public class ItemCollection {
 
     /**
      * Returns the item with the name given if it is in the collection.
-     * If not it returns null.
+     * If not it returns<code>null</code>.
      * @param name Name of item to get.
      * @return Item with the name given.
      */
-    public Item get(String name) {
+    /*
+    private Item get(String name) {
         return this.items.get(name);
     }
+    */
 
     /**
      * Takes the item with the given name out of the collection

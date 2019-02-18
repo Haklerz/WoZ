@@ -21,7 +21,7 @@ public class Room {
     }
 
     public Item getItem(String item) {
-        return this.items.get(item);
+        return this.items.take(item);
     }
 
     public Room getExit(String direction)  {

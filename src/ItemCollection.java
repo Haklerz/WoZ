@@ -27,6 +27,17 @@ public class ItemCollection {
     }
 
     /**
+     * Takes the item with the given name out of the collection
+     * and returns it. If there is no item by that name<code>null</code>is
+     * returned.
+     */
+    public Item take(String name) {
+        Item item = items.get(name);
+        items.remove(name);
+        return item;
+    }
+
+    /**
      * Returns wether the collection contains the item.
      * If the item is in the collection it returns<code>true</code>,
      * if not it returns<code>false</code>.

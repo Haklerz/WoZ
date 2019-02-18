@@ -1,3 +1,5 @@
+package src;
+
 /**
  * Represents an interactable item.
  */

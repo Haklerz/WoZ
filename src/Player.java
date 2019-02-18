@@ -1,3 +1,4 @@
+package src;
 
 /**
  * Represents a player.

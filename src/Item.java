@@ -1,3 +1,5 @@
+package src;
+
 /**
  * Represents an item with a name and a discription.
  * With this class you can:

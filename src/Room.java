@@ -1,24 +1,23 @@
 package src;
 
 import java.util.HashMap;
+import java.util.Iterator;
 
 /**
  * Represents a room.
  */
 public class Room {
-    private String name;
     private String description;
     private HashMap<String, Room> exits;
-    private ItemCollection items;
-
+    
     /**
      * Creates a room.
+     * 
      * @param description Description of the room.
      */
     public Room(String description) {
         this.description = description;
         this.exits = new HashMap<>();
-        this.items = new ItemCollection();
     }
 
     /**
@@ -42,11 +41,7 @@ public class Room {
         return this.description;
     }
 
-    public String getName() {
-        return this.name;
-    }
-
-    public Item takeItem(String name) {
-        return this.items.take(name);
+    public Iterator<String> getExitDirections() {
+        return this.exits.keySet().iterator();
     }
 }

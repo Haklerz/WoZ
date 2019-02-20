@@ -38,10 +38,6 @@ public class Player {
         return this.currentRoom;
     }
 
-    public void add(Item item) {
-        this.inventory.add(item);
-    }
-
     public Boolean hasItem(String name) {
         return this.inventory.hasItem(name);
     }

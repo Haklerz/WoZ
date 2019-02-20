@@ -4,52 +4,56 @@ import java.util.HashMap;
 
 /**
  * Represents a collection of items.
+ * <p>
+ * With this class you can:
+ * <ul>
+ * <li>Add an item to the item collection.
+ * <li>Take an item out of the collection.
+ * <li>Check wether the collection contains an item.
+ * </ul>
+ * @author Håkon "Haklerz" Lervik
+ * @version 1.0
  */
 public class ItemCollection {
-    HashMap<String, Item> items;
+    private HashMap<String, Item> items;
 
-    public ItemCollection() {}
+    /**
+     * Creates a item collection.
+     */
+    public ItemCollection() {
+        this.items = new HashMap<>();
+    }
 
     /**
      * Adds an item to the item collection.
-     * @param item Item to add.
+     * @param item Item to be added.
      */
-    public void add(Item item) {
-        items.put(item.getName(), item);
+    public void addItem(Item item) {
+        this.items.put(item.getName(), item);
     }
 
     /**
-     * Returns the item with the name given
-     * if it is in the collection.
-     * If not it returns<code>null</code>.
-     * @param name Name of item to get.
-     * @return Item with the name given.
+     * Takes an item out of the item collection. This method takes the
+     * name of the item to be retrieved. If the collection does not have
+     * the item,<code>null</code>is returned.
+     * @param itemName Name of item to be retrieved.
+     * @return Item taken from the collection if found.
      */
-    /*
-    private Item get(String name) {
-        return this.items.get(name);
-    }
-    */
-
-    /**
-     * Takes the item with the given name out of the collection
-     * and returns it. If there is no item by that
-     * name<code>null</code>is returned.
-     */
-    public Item take(String name) {
-        Item item = items.get(name.toLowerCase());
-        items.remove(name);
+    public Item takeItem(String itemName) {
+        Item item = this.items.get(itemName);
+        this.items.remove(itemName);
         return item;
     }
 
     /**
-     * Returns wether the collection contains the item with the given name.
-     * If the item is in the collection it returns
-     * <code>true</code>, if not it returns<code>false</code>.
-     * @param name Name of item to check.
+     * Returnes wether the item collection contains an item.
+     * This method takes the name of the item to check.
+     * If the collection contains the item it returns<code>true</code>,
+     * if not, it returns<code>false</code>.
+     * @param itemName Name of the item to check.
      * @return Wether the collection contains the item.
      */
-    public Boolean hasItem(String name) {
-        return this.items.containsKey(name);
+    public boolean hasItem(String itemName) {
+        return (this.items.get(itemName) != null);
     }
 }

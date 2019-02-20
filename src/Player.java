@@ -42,7 +42,7 @@ public class Player {
         this.inventory.add(item);
     }
 
-    public Boolean hasItem(Item item) {
-        return this.inventory.hasItem(item);
+    public Boolean hasItem(String name) {
+        return this.inventory.hasItem(name);
     }
 }

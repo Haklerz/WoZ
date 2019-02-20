@@ -11,7 +11,7 @@ public class Interactable extends Item {
         if (item.equals(requiredItem)) {
             switch(event) {
                 case COMBINE: break;
-                case OPEN:    break;
+                case USE:     break;
                 case CONSUME: break;
             }
         }

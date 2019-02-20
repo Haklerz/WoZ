@@ -7,6 +7,7 @@ public class Parser {
 
     public Command readCommand() {
         Command command = Command.UNKNOWN;
+        
         return command;
     }
 }

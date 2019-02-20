@@ -12,7 +12,8 @@ public class Room {
     
     /**
      * Creates a room.
-     * 
+     * This constructor takes a description of
+     * the room as a<code>String</code>.
      * @param description Description of the room.
      */
     public Room(String description) {
@@ -29,18 +30,36 @@ public class Room {
         this.exits.put(direction.toLowerCase(), neighbor);
     }
     
+    /**
+     * Returns the room in a specified direction if there is one.
+     * If there is no neightbouring room in that direction<code>null</code>is returned.
+     * @param direction Direction of room to get.
+     * @return The neighbouring room in the direction.
+     */
     public Room getExit(String direction) {
         return this.exits.get(direction.toLowerCase());
     }
 
+    /**
+     * Removes a connection to a neighbouring room in a direction if there is one.
+     * @param direction Direction of neighbouring room to remove.
+     */
     public void removeExit(String direction) {
         this.exits.remove(direction.toLowerCase());
     }
 
+    /**
+     * Returns the description of the room.
+     * @return the discription of the room.
+     */
     public String getDescription() {
         return this.description;
     }
 
+    /**
+     * 
+     * @return
+     */
     public Iterator<String> getExitDirections() {
         return this.exits.keySet().iterator();
     }

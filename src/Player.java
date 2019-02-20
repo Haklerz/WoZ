@@ -2,6 +2,8 @@ package src;
 
 /**
  * Represents a player.
+ * @author Håkon "Haklerz" Lervik
+ * @version 0.2
  */
 public class Player {
     private String name;

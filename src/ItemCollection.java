@@ -8,6 +8,8 @@ import java.util.HashMap;
 public class ItemCollection {
     HashMap<String, Item> items;
 
+    public ItemCollection() {}
+
     /**
      * Adds an item to the item collection.
      * @param item Item to add.
@@ -35,19 +37,19 @@ public class ItemCollection {
      * name<code>null</code>is returned.
      */
     public Item take(String name) {
-        Item item = items.get(name);
+        Item item = items.get(name.toLowerCase());
         items.remove(name);
         return item;
     }
 
     /**
-     * Returns wether the collection contains the item.
-     * If the item is in the collection it returns<code>true</code>,
-     * if not it returns<code>false</code>.
-     * @param item Item to check.
+     * Returns wether the collection contains the item with the given name.
+     * If the item is in the collection it returns
+     * <code>true</code>, if not it returns<code>false</code>.
+     * @param name Name of item to check.
      * @return Wether the collection contains the item.
      */
-    public Boolean hasItem(Item item) {
-        return this.items.containsValue(item);
+    public Boolean hasItem(String name) {
+        return this.items.containsKey(name);
     }
 }

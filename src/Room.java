@@ -6,6 +6,7 @@ import java.util.HashMap;
  * Represents a room.
  */
 public class Room {
+    private String name;
     private String description;
     private HashMap<String, Room> exits;
     private ItemCollection items;
@@ -17,6 +18,7 @@ public class Room {
     public Room(String description) {
         this.description = description;
         this.exits = new HashMap<>();
+        this.items = new ItemCollection();
     }
 
     /**
@@ -25,18 +27,26 @@ public class Room {
      * @param neighbor Neighboring room.
      */
     public void addExit(String direction, Room neighbor)  {
-        this.exits.put(direction, neighbor);
+        this.exits.put(direction.toLowerCase(), neighbor);
+    }
+    
+    public Room getExit(String direction) {
+        return this.exits.get(direction.toLowerCase());
+    }
+
+    public void removeExit(String direction) {
+        this.exits.remove(direction.toLowerCase());
     }
 
     public String getDescription() {
         return this.description;
     }
 
-    public Item getItem(String item) {
-        return this.items.take(item);
+    public String getName() {
+        return this.name;
     }
 
-    public Room getExit(String direction)  {
-        return exits.get(direction);
+    public Item takeItem(String name) {
+        return this.items.take(name);
     }
 }

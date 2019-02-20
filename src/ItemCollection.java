@@ -7,12 +7,13 @@ import java.util.HashMap;
  * <p>
  * With this class you can:
  * <ul>
+ * <li>Create a collection of items.
  * <li>Add an item to the item collection.
  * <li>Take an item out of the collection.
  * <li>Check wether the collection contains an item.
  * </ul>
  * @author Håkon "Haklerz" Lervik
- * @version 1.0
+ * @version 20.2.2019
  */
 public class ItemCollection {
     private HashMap<String, Item> items;

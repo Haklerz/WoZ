@@ -3,7 +3,7 @@ package src;
 /**
  * Represents a player.
  * @author Håkon "Haklerz" Lervik
- * @version 0.2
+ * @version 20.2.2019
  */
 public class Player {
     private String name;
@@ -28,16 +28,29 @@ public class Player {
         return this.name;
     }
 
+    /**
+     * Moves the player to a new room.
+     * @param room Room to move to.
+     */
     public void goRoom(Room room) {
         if (room != null) {
             this.currentRoom = room;
         }
     }
 
+    /**
+     * Returns the room the player is currently in.
+     * @return The room the player is currently in.
+     */
     public Room getCurrentRoom() {
         return this.currentRoom;
     }
 
+    /**
+     * Returns wether the player has a specific item.
+     * @param name Name of the item.
+     * @return Wether the player has a specific item.
+     */
     public Boolean hasItem(String name) {
         return this.inventory.hasItem(name);
     }

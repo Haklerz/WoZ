@@ -4,7 +4,19 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 /**
- * Represents a room.
+ * Represents a room. A room has a discription and a number of exits to other rooms.
+ * <p>
+ * With this class you can:
+ * <ul>
+ * <li>Create a room.
+ * <li>Add exits to the room.
+ * <li>Remove exits from the room.
+ * <li>Get the room at an exit.
+ * <li>Get a description of the room.
+ * <li>Get the exits of the room.
+ * </ul>
+ * @author Håkon "Haklerz" Lervik
+ * @version 20.2.2019
  */
 public class Room {
     private String description;
@@ -18,7 +30,7 @@ public class Room {
      */
     public Room(String description) {
         this.description = description;
-        this.exits = new HashMap<>();
+        this.exits = new HashMap<String, Room>();
     }
 
     /**

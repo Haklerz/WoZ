@@ -7,6 +7,7 @@ import java.util.HashMap;
  * <p>
  * With this class you can:
  * <ul>
+ * <li>Create items.
  * <li>Set the name of the item.
  * <li>Set the description of the item.
  * <li>Get the name of the item.

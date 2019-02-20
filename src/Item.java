@@ -4,17 +4,19 @@ import java.util.HashMap;
 
 /**
  * Represents an item with a name and a discription.
+ * <p>
  * With this class you can:
  * <ul>
  * <li>Set the name of the item.
  * <li>Set the description of the item.
  * <li>Get the name of the item.
  * <li>Get the description of the item.
+ * <li>Define new combinaitons of items.
  * </ul>
  * The name and the description are of the type<code>String</code>.
  * 
  * @author Håkon "Haklerz" Lervik
- * @version 1.0
+ * @version 20.2.2019
  */
 public class Item {
     private String name;

@@ -18,87 +18,60 @@ public class Game {
 
     public void run() {
         //Map definition
-        Room outside = new Room("forrest outside a house");
-        Room entrance = new Room("main entrace of the house");
-        Room cupboard = new Room("cupboard in the main entrance");
-        Room hallway = new Room("hallway");
-        Room mainBedroom = new Room("bedroom");
-        Room library = new Room("library");
-        Room kitchen = new Room("kitchen");
-        Room freezer = new Room("freezer");
-        Room stairwell = new Room("stairwell");
+        Room entrance   = new Room("main entrance");
+        Room hallway    = new Room("hallway");
+        Room bedroom    = new Room("bedroom");
         Room livingroom = new Room("livingroom");
-        Room mainBathroom = new Room("bathroom");
-        Room upstairs = new Room("upstairs of the house");
-        Room secondBedroom = new Room("bedroom");
-        Room secondBathroom = new Room("bathroom");
-        Room balcony = new Room("balcony");
-        Room loft = new Room("loft");
+        Room kitchen    = new Room("kitchen");
 
-        outside.addExit("north", entrance);
-        entrance.addExit("north", hallway);
-        entrance.addExit("west", cupboard);
-        entrance.addExit("south", outside);
-        cupboard.addExit("east", entrance);
-        hallway.addExit("southeast", stairwell);
-        hallway.addExit("northeast", kitchen);
+        hallway.addExit("east" , kitchen);
         hallway.addExit("north", livingroom);
-        hallway.addExit("northwest", library);
-        hallway.addExit("southwest", mainBedroom);
+        hallway.addExit("west" , bedroom);
         hallway.addExit("south", entrance);
-        mainBedroom.addExit("east", hallway);
-        library.addExit("east", hallway);
-        library.addExit("north", livingroom);
-        kitchen.addExit("west", hallway);
-        kitchen.addExit("south", freezer);
-        freezer.addExit("north", kitchen);
-        stairwell.addExit("west", hallway);
-        stairwell.addExit("up", upstairs);
-        livingroom.addExit("east", mainBathroom);
-        livingroom.addExit("southeast", hallway);
-        livingroom.addExit("southwest", library);
-        mainBathroom.addExit("west", livingroom);
-        upstairs.addExit("southeast", secondBedroom);
-        upstairs.addExit("northeast", secondBathroom);
-        upstairs.addExit("north", loft);
-        upstairs.addExit("west", balcony);
-        upstairs.addExit("down", stairwell);
-        secondBedroom.addExit("west", upstairs);
-        secondBathroom.addExit("west", upstairs);
-        balcony.addExit("east", upstairs);
-        loft.addExit("south", upstairs);
+
+        kitchen.addExit   ("west" , hallway);
+        livingroom.addExit("south", hallway);
+        bedroom.addExit   ("east" , hallway);
+        entrance.addExit  ("north", hallway);
 
         //Init player
         printWelcome();
-        player = new Player(getPlayerName(), outside);
-        /*
+        player = new Player(getPlayerName(), entrance);
+        parser = new Parser();
         while(running) {
-            quit();
+            printLocationInfo();
+            Command command = parser.getCommand();
+            executeCommand(command);
+            //quit();
         }
-        */
-        printLocationInfo();
         printFarewell();
     }
+
+    private void executeCommand(Command command) {
+        quit();
+    }
+
     private void printWelcome() {
-        System.out.println("Welcome boi!");
+        System.out.println("\nWelcome to the World of Zuul!");
+        System.out.println("This game is very bad.");
+        System.out.println("But it is under developemt so it's ok.\n");
         System.out.println("To start your adventure I need to know your name.");
     }
 
     private void printFarewell() {
-        System.out.println("Thank you for playing, " + player.getName() + " :)");
+        System.out.println("\nThank you for playing, " + player.getName() + ".");
     }    
 
     public String getPlayerName() {
-        System.out.println("What is your name?");
+        System.out.println("What do you wish to be called?");
         Scanner input = new Scanner(System.in);
         String playerName = input.next();
-        input.close();
         return playerName;
     }
 
     public void printLocationInfo() {
         Room currentRoom = player.getCurrentRoom();
-        System.out.println("You are in the " + currentRoom.getDescription() + ".\nWhere do you want to go next?");
+        System.out.println("\nYou are in the " + currentRoom.getDescription() + ".\nWhat do you want to do next?");
     }
 
     public void printExitDirections() {
@@ -121,6 +94,7 @@ public class Game {
     }
 
     public void quit() {
+        this.parser.quit();
         this.running = false;
     }
 }

@@ -1,6 +1,7 @@
 package src;
 
 import java.util.HashMap;
+import java.util.Iterator;
 
 /**
  * Represents a collection of items.
@@ -56,5 +57,13 @@ public class ItemCollection {
      */
     public boolean hasItem(String itemName) {
         return (this.items.get(itemName) != null);
+    }
+
+    /**
+     * Returns an iterator over the names of the items in the collection.
+     * @return An iterator over the names of the items in the collection.
+     */
+    public Iterator<String> getItemNames() {
+        return this.items.keySet().iterator();
     }
 }

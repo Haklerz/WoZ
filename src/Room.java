@@ -21,6 +21,7 @@ import java.util.Iterator;
 public class Room {
     private String description;
     private HashMap<String, Room> exits;
+    private ItemCollection items;
     
     /**
      * Creates a room.
@@ -74,5 +75,17 @@ public class Room {
      */
     public Iterator<String> getExitDirections() {
         return this.exits.keySet().iterator();
+    }
+
+    /**
+     * Adds an item to the room.
+     * @param item Item to be added.
+     */
+    public void addItem(Item item) {
+        this.items.addItem(item);
+    }
+
+    public Iterator<String> getItemNames() {
+        return this.items.getItemNames();
     }
 }

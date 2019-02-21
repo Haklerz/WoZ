@@ -1,5 +1,7 @@
 package src;
 
+import java.util.Iterator;
+
 /**
  * Represents a player.
  * @author Håkon "Haklerz" Lervik
@@ -53,5 +55,13 @@ public class Player {
      */
     public Boolean hasItem(String name) {
         return this.inventory.hasItem(name);
+    }
+
+    public void addItem(Item item) {
+        this.inventory.addItem(item);
+    }
+
+    public Iterator<String> getItemNames() {
+        return this.inventory.getItemNames();
     }
 }

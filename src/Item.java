@@ -1,7 +1,5 @@
 package src;
 
-import java.util.HashMap;
-
 /**
  * Represents an item with a name and a discription.
  * <p>
@@ -22,26 +20,7 @@ import java.util.HashMap;
 public class Item {
     private String name;
     private String description;
-    private HashMap<Item, Item> combinations;
-
-    /**
-     * Adds a definition for an item combination.
-     * This method takes what item should be combined with
-     * this item and what the combination's product should be.
-     * This method is also commutative, whitch means the
-     * combination is added to both this item and the other item
-     * so that the combination works both ways.
-     * <p>
-     * <code>
-     * this item + other item -> product item
-     * </code>
-     * @param item Item to be combined.
-     * @param product Product from combination.
-     */
-    public void addCombination(Item item, Item product) {
-        this.combinations.put(item, product);
-        item.addCombination(this, product);
-    }
+    private boolean collectible;
 
     /**
      * Sets the name of the item. Takes a<code>String</code>.
@@ -71,5 +50,16 @@ public class Item {
      */
     public String getDescription() {
         return this.description;
+    }
+
+    /**
+     * Sets wether the item is collectible.
+     */
+    public void setCollectible(boolean collectible) {
+        this.collectible = collectible;
+    }
+
+    public boolean isCollectible() {
+        return this.collectible;
     }
 }

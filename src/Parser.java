@@ -12,7 +12,7 @@ public class Parser {
     public void getCommand() {
     }
 
-    public void quit() {
+    public void close() {
         this.reader.close();
     }
 }

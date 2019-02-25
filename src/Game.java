@@ -29,10 +29,10 @@ public class Game {
         hallway.addExit("west" , bedroom);
         hallway.addExit("south", entrance);
 
-        kitchen.addExit   ("west" , hallway);
+        kitchen.addExit(   "west" , hallway);
         livingroom.addExit("south", hallway);
-        bedroom.addExit   ("east" , hallway);
-        entrance.addExit  ("north", hallway);
+        bedroom.addExit(   "east" , hallway);
+        entrance.addExit(  "north", hallway);
 
         //Init player
         printWelcome();
@@ -40,14 +40,13 @@ public class Game {
         parser = new Parser();
         while(running) {
             printLocationInfo();
-            Command command = parser.getCommand();
-            executeCommand(command);
-            //quit();
+            //Command command = parser.getCommand();
+            executeCommand();
         }
         printFarewell();
     }
 
-    private void executeCommand(Command command) {
+    private void executeCommand() {
         quit();
     }
 
@@ -94,7 +93,7 @@ public class Game {
     }
 
     public void quit() {
-        this.parser.quit();
+        this.parser.close();
         this.running = false;
     }
 }

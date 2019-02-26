@@ -20,7 +20,7 @@ public class Parser {
         return new Command(operation, firstOperand, secondOperand);
     }
 
-    public void quit() {
+    public void close() {
         this.reader.close();
     }
 }

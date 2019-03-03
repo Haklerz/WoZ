@@ -73,7 +73,7 @@ public class Room {
      * Returnes the iterator over the set of available exits from the room.
      * @return the iterator over the set of available exits from the room.
      */
-    public Iterator<String> getExitDirections() {
+    public Iterator<String> getExitIterator() {
         return this.exits.keySet().iterator();
     }
 

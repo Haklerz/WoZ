@@ -2,20 +2,18 @@ package src;
 
 import java.util.Scanner;
 
-/**
- * Represents a parser.
- */
 public class Parser {
-    private Scanner reader;
+    private Scanner scanner;
 
     public Parser() {
-        this.reader = new Scanner(System.in);
+        scanner = new Scanner(System.in);
     }
 
-    public void getCommand() {
+    public Instruction getInstruction() {
+        return new Instruction(scanner.nextLine());
     }
 
-    public void close() {
-        this.reader.close();
-    }
+	public void close() {
+        this.scanner.close();
+	}
 }

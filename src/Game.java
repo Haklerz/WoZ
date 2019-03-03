@@ -13,11 +13,10 @@ public class Game {
     private boolean running;
     
     public Game() {
-        this.running = true;
+        this.parser = new Parser();
     }
 
-    public void run() {
-        //Map definition
+    private void createWorld() {
         Room entrance   = new Room("main entrance");
         Room hallway    = new Room("hallway");
         Room bedroom    = new Room("bedroom");
@@ -34,20 +33,43 @@ public class Game {
         bedroom.addExit(   "east" , hallway);
         entrance.addExit(  "north", hallway);
 
-        //Init player
-        printWelcome();
         player = new Player(getPlayerName(), entrance);
-        parser = new Parser();
-        while(running) {
-            printLocationInfo();
-            //Command command = parser.getCommand();
-            executeCommand();
-        }
-        printFarewell();
     }
 
-    private void executeCommand() {
-        quit();
+    public void run() {
+        this.running = true;
+        this.printWelcome();
+        this.createWorld();
+        while(this.running) {
+            this.printLocationInfo();
+            Instruction instruction = parser.getInstruction();
+            this.executeInstruction(instruction);
+        }
+        this.printFarewell();
+    }
+
+    private void executeInstruction(Instruction instruction) {
+        Command command = instruction.getCommand();
+        String arguments = instruction.getArguments();
+        switch (command) {
+            case QUIT:
+                this.quit();
+                break;
+            
+            case GO:
+                Room currentRoom = this.player.getCurrentRoom();
+                this.player.go(currentRoom.getExit(arguments));
+                break;
+        
+            default:
+                this.printUnknownCommand();
+                break;
+        }
+    }
+
+    private void printUnknownCommand() {
+        System.out.println("I don't know what you mean.");
+        System.out.println("Type help for valid commands.");
     }
 
     private void printWelcome() {
@@ -64,18 +86,18 @@ public class Game {
     public String getPlayerName() {
         System.out.println("What do you wish to be called?");
         Scanner input = new Scanner(System.in);
-        String playerName = input.next();
+        String playerName = input.nextLine();
         return playerName;
     }
 
     public void printLocationInfo() {
         Room currentRoom = player.getCurrentRoom();
-        System.out.println("\nYou are in the " + currentRoom.getDescription() + ".\nWhat do you want to do next?");
+        System.out.println("\nYou are in the " + currentRoom.getDescription());
     }
 
     public void printExitDirections() {
         Room currentRoom = player.getCurrentRoom();
-        Iterator<String> directions = currentRoom.getExitDirections();
+        Iterator<String> directions = currentRoom.getExitIterator();
         String exitsString = "Exits:";
         while(directions.hasNext()) {
             exitsString += " " + directions.next();
@@ -84,7 +106,7 @@ public class Game {
     }
 
     public void printPlayerInventory() {
-        Iterator<String> inventory = player.getItemNames();
+        Iterator<String> inventory = player.getItemIterator();
         String itemNames = "Inventory:";
         while(inventory.hasNext()) {
             itemNames += " " + inventory.next();

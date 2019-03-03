@@ -34,7 +34,7 @@ public class Player {
      * Moves the player to a new room.
      * @param room Room to move to.
      */
-    public void goRoom(Room room) {
+    public void go(Room room) {
         if (room != null) {
             this.currentRoom = room;
         }
@@ -61,7 +61,7 @@ public class Player {
         this.inventory.addItem(item);
     }
 
-    public Iterator<String> getItemNames() {
+    public Iterator<String> getItemIterator() {
         return this.inventory.getItemNames();
     }
 }

@@ -17,10 +17,10 @@ public class Game {
 
     private void createWorld() {
         Room entrance   = new Room("in the Main Entrance", "The Main Entrance of the house is small but welcoming.");
-        Room hallway    = new Room("in the Hallway",       "The Hallway is long with a door in each end and on both sides.");
-        Room bedroom    = new Room("in the Bedroom",       "");
-        Room livingroom = new Room("in the Livingroom",    "");
-        Room kitchen    = new Room("in the Kitchen",       "");
+        Room hallway    = new Room("in the Hallway",       "The Hallway is long with a door in each end and on eather side.");
+        Room bedroom    = new Room("in the Bedroom",       "The Bedroom is large with a massive bed.");
+        Room livingroom = new Room("in the Livingroom",    "The Livingroom has a comfy couch and a big tube-TV.");
+        Room kitchen    = new Room("in the Kitchen",       "The Kitchen is clean and sleek.");
 
         hallway.addExit("east" , kitchen);
         hallway.addExit("north", livingroom);

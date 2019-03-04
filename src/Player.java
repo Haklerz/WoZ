@@ -20,6 +20,7 @@ public class Player {
     public Player(String name, Room startRoom) {
         this.name = name;
         this.currentRoom = startRoom;
+        this.inventory = new ItemCollection();
     }
 
     /**
@@ -37,6 +38,9 @@ public class Player {
     public void go(Room room) {
         if (room != null) {
             this.currentRoom = room;
+        }
+        else {
+            throw new NullPointerException("No room in that direction.");
         }
     }
 
@@ -62,6 +66,6 @@ public class Player {
     }
 
     public Iterator<String> getItemIterator() {
-        return this.inventory.getItemNames();
+        return this.inventory.getItemIterator();
     }
 }

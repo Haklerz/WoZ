@@ -19,6 +19,7 @@ import java.util.Iterator;
  * @version 20.2.2019
  */
 public class Room {
+    private String name;
     private String description;
     private HashMap<String, Room> exits;
     private ItemCollection items;
@@ -29,9 +30,11 @@ public class Room {
      * the room as a<code>String</code>.
      * @param description Description of the room.
      */
-    public Room(String description) {
+    public Room(String name, String description) {
+        this.name = name;
         this.description = description;
         this.exits = new HashMap<String, Room>();
+        this.items = new ItemCollection();
     }
 
     /**
@@ -62,8 +65,16 @@ public class Room {
     }
 
     /**
+     * Returns the name of the room.
+     * @return The name of the room.
+     */
+    public String getName() {
+        return this.name;
+    }
+
+    /**
      * Returns the description of the room.
-     * @return the discription of the room.
+     * @return The discription of the room.
      */
     public String getDescription() {
         return this.description;
@@ -85,7 +96,7 @@ public class Room {
         this.items.addItem(item);
     }
 
-    public Iterator<String> getItemNames() {
-        return this.items.getItemNames();
+    public Iterator<String> getItemIterator() {
+        return this.items.getItemIterator();
     }
 }

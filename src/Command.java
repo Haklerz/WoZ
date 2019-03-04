@@ -3,6 +3,9 @@ package src;
 public enum Command {
     GO("go"),
     QUIT("quit"),
+    LOOK("look"),
+    HELP("help"),
+    INVENTORY("inventory"),
     UNKNOWN("?");
 
     public String commandString;

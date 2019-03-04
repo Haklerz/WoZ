@@ -1,7 +1,6 @@
 package src;
 
 import java.util.Iterator;
-import java.util.Scanner;
 
 /**
  * @author Håkon "Haklerz" Lervik
@@ -17,11 +16,11 @@ public class Game {
     }
 
     private void createWorld() {
-        Room entrance   = new Room("main entrance");
-        Room hallway    = new Room("hallway");
-        Room bedroom    = new Room("bedroom");
-        Room livingroom = new Room("livingroom");
-        Room kitchen    = new Room("kitchen");
+        Room entrance   = new Room("in the Main Entrance", "The Main Entrance of the house is small but welcoming.");
+        Room hallway    = new Room("in the Hallway",       "The Hallway is long with a door in each end and on both sides.");
+        Room bedroom    = new Room("in the Bedroom",       "");
+        Room livingroom = new Room("in the Livingroom",    "");
+        Room kitchen    = new Room("in the Kitchen",       "");
 
         hallway.addExit("east" , kitchen);
         hallway.addExit("north", livingroom);
@@ -40,9 +39,10 @@ public class Game {
         this.running = true;
         this.printWelcome();
         this.createWorld();
+        this.printLocationName();
         while(this.running) {
-            this.printLocationInfo();
-            Instruction instruction = parser.getInstruction();
+            System.out.print(">");
+            Instruction instruction = this.parser.getInstruction();
             this.executeInstruction(instruction);
         }
         this.printFarewell();
@@ -51,51 +51,89 @@ public class Game {
     private void executeInstruction(Instruction instruction) {
         Command command = instruction.getCommand();
         String arguments = instruction.getArguments();
+        Room currentRoom = player.getCurrentRoom();
         switch (command) {
             case QUIT:
                 this.quit();
                 break;
             
             case GO:
-                Room currentRoom = this.player.getCurrentRoom();
-                this.player.go(currentRoom.getExit(arguments));
+                try {
+                    this.player.go(currentRoom.getExit(arguments));
+                }
+                catch(NullPointerException e) {
+                    this.printNoRoom();
+                }
+                this.printLocationName();
+                this.printExitDirections();
+                break;
+            
+            case LOOK:
+                this.printLocationInfo();
+                this.printItems();
+                this.printExitDirections();
+                break;
+            
+            case HELP:
+                this.printHelpInfo();
+                break;
+            
+            case INVENTORY:
+                this.printPlayerInventory();
                 break;
         
-            default:
+            case UNKNOWN:
                 this.printUnknownCommand();
                 break;
         }
     }
 
+    private void printNoRoom() {
+        System.out.println("\nNo room in that direction.");
+    }
+
+    private void printHelpInfo() {
+        String commandsString = "\nCommands:";
+        for (Command testCommand : Command.values()) {
+            if (!testCommand.getCommandString().equals("?")) {
+                commandsString += " " + testCommand.getCommandString();
+            }
+        }
+        System.out.println(commandsString);
+    }
+
+    private void printLocationName() {
+        Room currenRoom = this.player.getCurrentRoom();
+        System.out.println("\nYou are " + currenRoom.getName() + ".");
+    }
+
     private void printUnknownCommand() {
-        System.out.println("I don't know what you mean.");
+        System.out.println("\nI don't know what you mean.");
         System.out.println("Type help for valid commands.");
     }
 
     private void printWelcome() {
         System.out.println("\nWelcome to the World of Zuul!");
         System.out.println("This game is very bad.");
-        System.out.println("But it is under developemt so it's ok.\n");
-        System.out.println("To start your adventure I need to know your name.");
+        System.out.println("But it is under developemt so it's ok.");
     }
 
     private void printFarewell() {
         System.out.println("\nThank you for playing, " + player.getName() + ".");
     }    
 
-    public String getPlayerName() {
+    private String getPlayerName() {
+        System.out.println("\nTo start your adventure I need to know your name.");
         System.out.println("What do you wish to be called?");
-        Scanner input = new Scanner(System.in);
-        String playerName = input.nextLine();
-        return playerName;
+        return parser.getInput();
     }
 
-    public void printLocationInfo() {
+    private void printLocationInfo() {
         Room currentRoom = player.getCurrentRoom();
-        System.out.println("\nYou are in the " + currentRoom.getDescription());
+        System.out.println("\n" + currentRoom.getDescription());
     }
 
-    public void printExitDirections() {
+    private void printExitDirections() {
         Room currentRoom = player.getCurrentRoom();
         Iterator<String> directions = currentRoom.getExitIterator();
         String exitsString = "Exits:";
@@ -105,16 +143,26 @@ public class Game {
         System.out.println(exitsString);
     }
 
-    public void printPlayerInventory() {
+    private void printPlayerInventory() {
         Iterator<String> inventory = player.getItemIterator();
-        String itemNames = "Inventory:";
+        String itemNames = "\nInventory:";
         while(inventory.hasNext()) {
             itemNames += " " + inventory.next();
         }
         System.out.println(itemNames);
     }
 
-    public void quit() {
+    private void printItems() {
+        Room currentRoom = this.player.getCurrentRoom();
+        Iterator<String> items = currentRoom.getItemIterator();
+        String itemNames = "Items:";
+        while(items.hasNext()) {
+            itemNames += " " + items.next();
+        }
+        System.out.println(itemNames);
+    }
+
+    private void quit() {
         this.parser.close();
         this.running = false;
     }

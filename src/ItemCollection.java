@@ -63,7 +63,7 @@ public class ItemCollection {
      * Returns an iterator over the names of the items in the collection.
      * @return An iterator over the names of the items in the collection.
      */
-    public Iterator<String> getItemNames() {
+    public Iterator<String> getItemIterator() {
         return this.items.keySet().iterator();
     }
 }

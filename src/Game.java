@@ -39,7 +39,6 @@ public class Game {
         this.running = true;
         this.printWelcome();
         this.createWorld();
-        this.printLocationName();
         while(this.running) {
             System.out.print(">");
             Instruction instruction = this.parser.getInstruction();

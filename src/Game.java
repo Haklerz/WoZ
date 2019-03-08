@@ -22,6 +22,9 @@ public class Game {
         Room livingroom = new Room("in the Livingroom",    "The Livingroom has a comfy couch and a big tube-TV.");
         Room kitchen    = new Room("in the Kitchen",       "The Kitchen is clean and sleek.");
 
+        Item rope = new Item("Rope",   "A long rope made from some sort of twine.", true);
+        Item clock = new Item("Clock", "A big grandfather clock with lots of litte embelishments.", false);
+
         hallway.addExit("east" , kitchen);
         hallway.addExit("north", livingroom);
         hallway.addExit("west" , bedroom);
@@ -31,6 +34,9 @@ public class Game {
         livingroom.addExit("south", hallway);
         bedroom.addExit(   "east" , hallway);
         entrance.addExit(  "north", hallway);
+
+        hallway.addItem(clock);
+        entrance.addItem(rope);
 
         player = new Player(getPlayerName(), entrance);
     }
@@ -84,8 +90,21 @@ public class Game {
                 this.printHelpInfo();
                 break;
             
-            case INVENTORY:
+            case BAG:
                 this.printPlayerInventory();
+                break;
+
+            case TAKE:
+                Item item = this.player.getCurrentRoom().takeItem(arguments);
+                if (item != null) {
+                    this.player.addItem(item);
+                }
+                else {
+                    System.out.println("No item by that name.");
+                }
+                break;
+            
+            case DROP:
                 break;
         
             case UNKNOWN:
@@ -151,7 +170,7 @@ public class Game {
 
     private void printPlayerInventory() {
         Iterator<String> inventory = player.getItemIterator();
-        String itemNames = "\nInventory:";
+        String itemNames = "\nItems in your inventory:";
         while(inventory.hasNext()) {
             itemNames += " " + inventory.next();
         }

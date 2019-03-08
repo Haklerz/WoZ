@@ -161,7 +161,7 @@ public class Game {
     private void printItems() {
         Room currentRoom = this.player.getCurrentRoom();
         Iterator<String> items = currentRoom.getItemIterator();
-        String itemNames = "Items:";
+        String itemNames = "Items in the room:";
         while(items.hasNext()) {
             itemNames += " " + items.next();
         }

@@ -40,6 +40,8 @@ public class Game {
         this.printWelcome();
         this.createWorld();
         while(this.running) {
+            this.printLocationName();
+            this.printExitDirections();
             System.out.print(">");
             Instruction instruction = this.parser.getInstruction();
             this.executeInstruction(instruction);
@@ -50,7 +52,6 @@ public class Game {
     private void executeInstruction(Instruction instruction) {
         Command command = instruction.getCommand();
         String arguments = instruction.getArguments();
-        Room currentRoom = player.getCurrentRoom();
         switch (command) {
             case QUIT:
                 this.quit();
@@ -58,19 +59,25 @@ public class Game {
             
             case GO:
                 try {
-                    this.player.go(currentRoom.getExit(arguments));
+                    if (arguments.equals("back")) {
+                        Room previousRoom = this.player.popRoomLog();
+                        this.player.goRoom(previousRoom);
+                    }
+                    else {
+                        Room currentRoom = player.getCurrentRoom();
+                        this.player.pushRoomLog(currentRoom);
+                        this.player.goRoom(currentRoom.getExit(arguments));
+                    }
                 }
                 catch(NullPointerException e) {
                     this.printNoRoom();
                 }
-                this.printLocationName();
-                this.printExitDirections();
                 break;
             
             case LOOK:
                 this.printLocationInfo();
                 this.printItems();
-                this.printExitDirections();
+                //this.printExitDirections();
                 break;
             
             case HELP:

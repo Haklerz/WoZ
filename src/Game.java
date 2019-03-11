@@ -40,6 +40,8 @@ public class Game {
         this.printWelcome();
         this.createWorld();
         while(this.running) {
+            this.printLocationName();
+            this.printExitDirections();
             System.out.print(">");
             Instruction instruction = this.parser.getInstruction();
             this.executeInstruction(instruction);
@@ -58,19 +60,21 @@ public class Game {
             
             case GO:
                 try {
-                    this.player.go(currentRoom.getExit(arguments));
+                    if (arguments.equals("back")) {
+                        this.player.go(this.player.getPreviousRoom());
+                    }
+                    else {
+                        this.player.go(currentRoom.getExit(arguments));
+                    }
                 }
                 catch(NullPointerException e) {
                     this.printNoRoom();
                 }
-                this.printLocationName();
-                this.printExitDirections();
                 break;
             
             case LOOK:
                 this.printLocationInfo();
                 this.printItems();
-                this.printExitDirections();
                 break;
             
             case HELP:
@@ -154,7 +158,7 @@ public class Game {
     private void printItems() {
         Room currentRoom = this.player.getCurrentRoom();
         Iterator<String> items = currentRoom.getItemIterator();
-        String itemNames = "Items:";
+        String itemNames = "Items in the room:";
         while(items.hasNext()) {
             itemNames += " " + items.next();
         }

@@ -22,11 +22,10 @@ public class Item {
     private String description;
     private boolean collectible;
 
-    /**
-     * Sets the name of the item. Takes a<code>String</code>.
-     */
-    public void setName(String name) {
+    public Item(String name, String description, boolean collectible) {
         this.name = name;
+        this.description = description;
+        this.collectible = collectible;
     }
 
     /**
@@ -35,13 +34,6 @@ public class Item {
      */
     public String getName() {
         return this.name;
-    }
-    
-    /**
-     * Sets the description of the item. Takes a<code>String</code>.
-     */
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     /**
@@ -53,12 +45,9 @@ public class Item {
     }
 
     /**
-     * Sets wether the item is collectible.
+     * Returns wether the item is collectible as a <code>boolean</code>.
+     * @return wether the item is collectible
      */
-    public void setCollectible(boolean collectible) {
-        this.collectible = collectible;
-    }
-
     public boolean isCollectible() {
         return this.collectible;
     }

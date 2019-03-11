@@ -38,9 +38,9 @@ public class Player {
      * Moves the player to a new room.
      * @param room room to move to
      */
-    public void go(Room room) {
+    public void goRoom(Room room) {
         if (room != null) {
-            this.roomLog.push(this.currentRoom);
+            //this.roomLog.push(this.currentRoom);
             this.currentRoom = room;
         }
         else {
@@ -49,10 +49,23 @@ public class Player {
     }
 
     /**
+     * Pushes a room on to the room log stack.
+     * @param room room to log
+     */
+    public void pushRoomLog(Room room) {
+        if (room != null) {
+            this.roomLog.push(room);
+        }
+        else {
+            throw new NullPointerException("Cannot push null room.");
+        }
+    }
+
+    /**
      * Returns the previous room the player was in.
      * @return the previous room the player was in
      */
-    public Room getPreviousRoom() {
+    public Room popRoomLog() {
         if (!this.roomLog.empty()) {
             return this.roomLog.pop();
         }

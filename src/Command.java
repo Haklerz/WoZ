@@ -5,7 +5,9 @@ public enum Command {
     QUIT("quit"),
     LOOK("look"),
     HELP("help"),
-    INVENTORY("inventory"),
+    BAG("bag"),
+    TAKE("take"),
+    DROP("drop"),
     UNKNOWN("?");
 
     public String commandString;
